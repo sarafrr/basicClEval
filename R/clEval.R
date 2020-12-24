@@ -1,23 +1,17 @@
-####################################################################
-## Basic Functions for Cluster Evaluation
-####################################################################
-
-####################################################################
-## clMeans() function
-####################################################################
-## Arguments
-####################################################################
-## data - data frame or matrix
-## clClassification - vector of samples' clustering labels
-## ... - other arguments
-####################################################################
-## Value
-####################################################################
-## List with:
-## clCentres - data frame nClustersxncol(data)
-## nClusters - number of clusters
-## sizeCl - number of elements by cluster
-####################################################################
+#' Compute centroids
+#'
+#' This function computes the centroids for each cluster.
+#' It takes in input a data.frame or a matrix of data and a vector
+#' containing the classification of each sample.
+#'
+#' @param data Dataset of class type data.frame or matrix
+#' @param clClassification Vector of samples' clustering labels
+#' @param ... Other arguments
+#' @return A list with:\cr
+#' * clCentres - data frame of means nClustersxncol(data)
+#' * nClusters - number of clusters
+#' * sizeCl - number of elements by cluster
+#' @export
 clMeans <- function(data,clClassification,verbose=TRUE,... ) {
   if(is.matrix(data)){
     mat <-data
@@ -52,22 +46,20 @@ clMeans <- function(data,clClassification,verbose=TRUE,... ) {
   )
 }
 
-####################################################################
-## clInnerVariances() function
-####################################################################
-## Arguments
-####################################################################
-## data - data frame or matrix
-## clClassification - vector of samples' clustering labels
-## ... - other arguments
-####################################################################
-## Value
-####################################################################
-## List with:
-## clVariances - data frame nClustersxncol(data)
-## nClusters - number of clusters
-## sizeCl - number of elements by cluster
-####################################################################
+#' Compute clusters' variances
+#'
+#' This function computes the inner variance for each cluster.
+#' It takes in input a data.frame or a matrix of data and a vector
+#' containing the classification of each sample.
+#'
+#' @param data Dataset of class type data.frame or matrix
+#' @param clClassification Vector of samples' clustering labels
+#' @param ... Other arguments
+#' @return A list with:\cr
+#' * clVariances - data frame of variances nClustersxncol(data)
+#' * nClusters - number of clusters
+#' * sizeCl - number of elements by cluster
+#' @export
 clInnerVariances <- function(data,clClassification,verbose=TRUE,... ) {
   if(is.matrix(data)){
     mat <-data
@@ -102,22 +94,22 @@ clInnerVariances <- function(data,clClassification,verbose=TRUE,... ) {
   )
 }
 
-####################################################################
-## wcss() function
-####################################################################
-## Arguments
-####################################################################
-## data - data frame or matrix
-## clClassification - vector of samples' clustering labels
-## ... - other arguments
-####################################################################
-## Value
-####################################################################
-## List with:
-## clVariances - data frame nClustersxncol(data)
-## nClusters - number of clusters
-## sizeCl - number of elements by cluster
-####################################################################
+#' Compute clusters' Within Cluster Sum of Squares
+#'
+#' This function computes the Within Cluster Sum of Squares WCSS for each cluster.
+#' It takes in input a data.frame or a matrix of data and a vector
+#' containing the classification of each sample.
+#'
+#' @param data Dataset of class type data.frame or matrix
+#' @param clClassification Vector of samples' clustering labels
+#' @param ... Other arguments
+#' @return A list with:\cr
+#' * WCSSByClByVar - WCSS by cluster by variable
+#' * WCSSByClB - WCSS by cluster
+#' * WCSS - Sum of the total WCSS
+#' * nClusters - number of clusters
+#' * sizeCl - number of elements by cluster
+#' @export
 wcss <- function(data,clClassification,verbose=TRUE,... ) {
   if(is.matrix(data)){
     mat <-data
@@ -156,26 +148,24 @@ wcss <- function(data,clClassification,verbose=TRUE,... ) {
   )
 }
 
-####################################################################
-## print.wcss() function
-####################################################################
-## Arguments
-####################################################################
-## x - wcss object
-## ... - other arguments
-####################################################################
-## Value
-####################################################################
-## Print of:
-## WCSSByClByVar - Within Cluster Sum of Squares by cluster by variable
-## WCSSByCl - Within Cluster Sum of Squares by cluster
-## nClusters - number of clusters
-## sizeCl - number of elements by cluster
-####################################################################
+#' Prints the information of an object returned by wcss
+#'
+#' This function prints all the information contained into [wcss]
+#' It takes in input an object returned by [wcss]
+#'
+#' @param x Object returned by [wcss] function
+#' @param ... Other arguments
+#' @return A print with a brief explanation of:\cr
+#' * WCSSByClByVar - WCSS by cluster by variable
+#' * WCSSByClB - WCSS by cluster
+#' * WCSS - Sum of the total WCSS
+#' * nClusters - number of clusters
+#' * sizeCl - number of elements by cluster
+#' @export
 print.wcss <- function(x,...){
-  cat("\nWithin Cluster Sum of Squares by cluser by variable:\n")
+  cat("\nWithin Cluster Sum of Squares by cluster by variable:\n")
   print(x$WCSSByClByVar, ...)
-  cat("\nWithin Cluster Sum of Squares by cluser:\n")
+  cat("\nWithin Cluster Sum of Squares by cluster:\n")
   print(x$WCSSByCl, ...)
   cat("\nNumber of clusters:\n")
   print(x$nClusters, ...)
